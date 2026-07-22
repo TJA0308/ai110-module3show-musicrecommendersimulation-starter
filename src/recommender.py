@@ -232,7 +232,9 @@ def score_song(
         similarity = _similarity(
             float(song[feature]), float(user_prefs[preference_key]), feature_range
         )
-        points = active_weights[feature] * similarity
+        # Round each displayed component before adding it so the explanation
+        # arithmetic reconciles exactly with the returned total.
+        points = round(active_weights[feature] * similarity, 2)
         score += points
         reasons.append(f"{feature} similarity (+{points:.2f})")
 

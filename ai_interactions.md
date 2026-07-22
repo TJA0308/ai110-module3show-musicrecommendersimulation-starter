@@ -51,3 +51,7 @@ AI compared duplicating three scoring functions with keeping one scoring algorit
 ## Visual Output
 
 The first table placed all explanation text on one extremely wide line. The final `format_table()` function uses fixed column widths and wraps the Reasons column across additional rows. It uses only Python's standard library, so users do not need another package to see titles, artists, scores, and full explanations in a readable table.
+
+## Final Audit Refinements
+
+AI-assisted auditing identified three final documentation and precision issues: the missing explicit pop-versus-rock comparison, unanswered reflection prompts, and small differences between totals and independently rounded explanation components. I reviewed and accepted fixes that added the missing comparison and reflection answers, rounded each numerical score component before accumulation, and added a regression test proving that explanation components sum to the returned score.

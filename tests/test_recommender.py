@@ -1,5 +1,6 @@
 """Tests for both functional and object-oriented recommender interfaces."""
 
+import re
 from pathlib import Path
 
 import pytest
@@ -121,6 +122,27 @@ def test_diversity_penalty_is_explained():
     results = recommend_songs(preferences, songs, k=3, diversify=True)
 
     assert any("repeated genre penalty" in explanation for _, _, explanation in results)
+
+
+def test_explanation_components_sum_to_displayed_score():
+    """Rounded explanation components should reconcile with the final score."""
+
+    songs = load_songs("data/songs.csv")
+    preferences = {
+        "genre": "pop",
+        "mood": "happy",
+        "energy": 0.85,
+        "tempo_bpm": 125,
+        "danceability": 0.85,
+    }
+
+    for _, score, explanation in recommend_songs(preferences, songs, k=5):
+        components = re.findall(r"\(([+-])(\d+\.\d+)\)", explanation)
+        explained_total = sum(
+            float(value) if sign == "+" else -float(value)
+            for sign, value in components
+        )
+        assert explained_total == pytest.approx(score)
 
 
 def test_recommend_returns_songs_sorted_by_score():

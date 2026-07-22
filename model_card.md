@@ -20,6 +20,8 @@ VibeRank also provides `genre_first`, `mood_first`, and `energy_focus` strategie
 
 ## 4. Data
 
+I expanded the starter catalog to 20 songs by adding more songs, genres, moods, and audio attributes; I did not remove any required starter functionality.
+
 The dataset contains 20 fictional songs representing pop, lofi, rock, ambient, jazz, synthwave, indie pop, EDM, R&B, folk, hip-hop, indie, metal, and Latin music. Each row includes an ID, title, artist, genre, mood, energy, tempo, valence, danceability, acousticness, popularity, release decade, instrumentalness, speechiness, and duration.
 
 The data was designed for controlled testing rather than collected from real listeners or audio files. Some genres have multiple examples while others have only one. The labels are subjective, and the dataset does not include lyrics, language, culture, instrumentation, accessibility needs, or actual listening behavior.
@@ -46,9 +48,13 @@ I ran the recommender on three intentionally different profiles and inspected th
 
 The pop and lofi outputs differed as expected: the pop list started with `Sunrise City` and `Golden Weekend`, while the lofi list started with `Library Rain` and `Midnight Coding`. The lofi list also promoted ambient and jazz tracks because their energy and acousticness resembled the study profile.
 
+The pop and rock outputs also differed clearly. The pop list began with two happy pop songs, while the rock list began with `Storm Runner` and then favored intense, high-energy tracks. `Gym Hero` appeared in both lists for different combinations of reasons: its genre and energy helped it for pop, while its intense mood and energy helped it for rock.
+
 The lofi and rock outputs showed the largest contrast. Low-energy `Library Rain` led the lofi list, while high-energy `Storm Runner` led the rock list. `Gym Hero` appeared in the rock results despite being pop because its intense mood and energy were close to the rock profile. This was a useful reminder that the algorithm ranks feature combinations rather than enforcing genre as a hard filter.
 
-I also performed a sensitivity experiment. For the pop profile, switching from `genre_first` to `energy_focus` changed the third result from `Gym Hero` to `Rooftop Lights`. Changing weights made the list different, but the outcome depended on mood and other similarities as well as energy. Finally, ten automated tests checked CSV type conversion, exact scoring math, descending ranking, strategy changes, diversity explanations, OOP behavior, empty input, `k=0`, and invalid modes.
+I also performed a sensitivity experiment. For the pop profile, switching from `genre_first` to `energy_focus` changed the third result from `Gym Hero` to `Rooftop Lights`. Changing weights made the list different, but the outcome depended on mood and other similarities as well as energy. Finally, eleven automated tests checked CSV type conversion, exact scoring math, descending ranking, strategy changes, diversity explanations and arithmetic, OOP behavior, empty input, `k=0`, and invalid modes.
+
+The most unexpected result was Gym Hero appearing in the rock recommendations despite being categorized as pop; its intense mood and high energy compensated for the genre mismatch.
 
 ## 8. Ideas for Improvement
 
@@ -59,6 +65,6 @@ I also performed a sensitivity experiment. For the pop profile, switching from `
 
 ## 9. Personal Reflection
 
-The most important lesson was that recommendation has two separate steps: scoring one item and ranking a collection of items. A simple similarity formula can create output that feels personalized, but that does not make it neutral or intelligent in the same way as a learned production model. The results depend heavily on which attributes exist, how the data is distributed, and which weights the developer chooses.
+The most important lesson was that recommendation has two separate steps: scoring one item and ranking a collection of items. A simple similarity formula can create output that feels personalized, but that does not make it neutral or intelligent in the same way as a learned production model. Building VibeRank changed how I think about real recommendation apps because even a plausible personalized result reflects choices about which attributes exist, how the data is distributed, and which weights the developer chooses.
 
-AI tools were useful for proposing diverse data rows, generating an initial modular implementation, and suggesting edge cases. I still needed to verify that numerical CSV values were converted correctly, check a perfect-match score by hand (`3 + 2 + 2 = 7`), run the CLI, compare profiles, and test whether the weight shift actually changed a result. If I extended the project, I would collect explicit user feedback and compare the hand-built scoring rule with a learned baseline.
+AI tools were useful for proposing diverse data rows, generating an initial modular implementation, and suggesting edge cases. I still needed to verify that numerical CSV values were converted correctly, check a perfect-match score by hand (`3 + 2 + 2 = 7`), run the CLI, compare profiles, and test whether the weight shift actually changed a result. Human judgment remains necessary to choose responsible features and weights, interpret surprising recommendations, decide what fairness means, and recognize users or cultures missing from the data. If I extended the project, I would collect explicit user feedback and compare the hand-built scoring rule with a learned baseline.

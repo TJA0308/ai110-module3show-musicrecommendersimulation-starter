@@ -68,17 +68,18 @@ python -m src.main --mode mood_first
 python -m src.main --mode energy_focus --no-diversity
 ```
 
-Run the tests:
+Run the tests and lint checks:
 
 ```bash
-pytest
+python -m pytest -v
+python -m ruff check .
 ```
 
 Verified test result:
 
 ```text
-..........                                                               [100%]
-10 passed in 0.01s
+11 passed
+All checks passed!
 ```
 
 ## Sample Recommendation Output
@@ -88,11 +89,11 @@ The following results were produced by `python -m src.main`. The complete termin
 ### High-Energy Pop
 
 ```text
-1. Sunrise City    — 10.06 — genre match (+3.00); mood match (+2.00); energy similarity (+1.94)
-2. Golden Weekend  —  9.58 — genre match (+3.00); mood match (+2.00); energy similarity (+1.78); repeated genre penalty (-0.35)
-3. Gym Hero        —  7.24 — genre match (+3.00); energy similarity (+1.84); repeated genre penalty (-0.70)
-4. Rooftop Lights  —  6.88 — mood match (+2.00); energy similarity (+1.82); tempo similarity (+0.49)
-5. Salsa Sunset    —  5.07 — energy similarity (+1.96); tempo similarity (+0.49); valence similarity (+0.48)
+1. Sunrise City    — 10.04 — genre match (+3.00); mood match (+2.00); energy similarity (+1.94)
+2. Golden Weekend  —  9.56 — genre match (+3.00); mood match (+2.00); energy similarity (+1.78); repeated genre penalty (-0.35)
+3. Gym Hero        —  7.22 — genre match (+3.00); energy similarity (+1.84); repeated genre penalty (-0.70)
+4. Rooftop Lights  —  6.86 — mood match (+2.00); energy similarity (+1.82); tempo similarity (+0.49)
+5. Salsa Sunset    —  5.06 — energy similarity (+1.96); tempo similarity (+0.49); valence similarity (+0.48)
 ```
 
 ### Chill Lofi Study
@@ -100,7 +101,7 @@ The following results were produced by `python -m src.main`. The complete termin
 ```text
 1. Library Rain        — 10.18 — genre match (+3.00); mood match (+2.00); energy similarity (+2.00)
 2. Midnight Coding     —  9.59 — genre match (+3.00); mood match (+2.00); energy similarity (+1.86); repeated genre penalty (-0.35)
-3. Spacewalk Thoughts  —  6.72 — mood match (+2.00); energy similarity (+1.86); acousticness similarity (+0.46)
+3. Spacewalk Thoughts  —  6.71 — mood match (+2.00); energy similarity (+1.86); acousticness similarity (+0.46)
 4. Focus Flow          —  6.32 — genre match (+3.00); repeated artist penalty (-1.00); repeated genre penalty (-0.70)
 5. Coffee Shop Stories —  4.80 — energy similarity (+1.96); acousticness similarity (+0.48); danceability similarity (+0.49)
 ```
@@ -109,13 +110,15 @@ The following results were produced by `python -m src.main`. The complete termin
 
 ```text
 1. Storm Runner      — 10.14 — genre match (+3.00); mood match (+2.00); energy similarity (+1.98)
-2. Iron Pulse        —  6.83 — mood match (+2.00); energy similarity (+1.88); tempo similarity (+0.41)
+2. Iron Pulse        —  6.81 — mood match (+2.00); energy similarity (+1.88); tempo similarity (+0.41)
 3. Gym Hero          —  6.64 — mood match (+2.00); energy similarity (+1.98); tempo similarity (+0.41)
-4. Electric Horizon —  4.58 — energy similarity (+1.90); tempo similarity (+0.45); acousticness similarity (+0.46)
+4. Electric Horizon —  4.57 — energy similarity (+1.90); tempo similarity (+0.45); acousticness similarity (+0.46)
 5. Salsa Sunset     —  4.44 — energy similarity (+1.82); acousticness similarity (+0.47); duration similarity (+0.24)
 ```
 
 These profiles produce meaningfully different results. The pop profile selects two happy pop songs first. The lofi profile shifts toward low-energy, acoustic, often instrumental tracks. The rock profile ranks `Storm Runner` first because it is the catalog's only exact rock/intense match; other intense and high-energy songs follow even when their genres differ.
+
+Pairwise, pop versus lofi contrasts energetic, danceable songs with slower acoustic and instrumental tracks; pop versus rock contrasts happy pop matches with intense, fast tracks; and lofi versus rock shows the strongest low-energy versus high-energy split.
 
 ## Experiment: Shifting the Weights
 
