@@ -1,11 +1,21 @@
-id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
-1,Sunrise City,Neon Echo,pop,happy,0.82,118,0.84,0.79,0.18
-2,Midnight Coding,LoRoom,lofi,chill,0.42,78,0.56,0.62,0.71
-3,Storm Runner,Voltline,rock,intense,0.91,152,0.48,0.66,0.10
-4,Library Rain,Paper Lanterns,lofi,chill,0.35,72,0.60,0.58,0.86
-5,Gym Hero,Max Pulse,pop,intense,0.93,132,0.77,0.88,0.05
-6,Spacewalk Thoughts,Orbit Bloom,ambient,chill,0.28,60,0.65,0.41,0.92
-7,Coffee Shop Stories,Slow Stereo,jazz,relaxed,0.37,90,0.71,0.54,0.89
-8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22
-9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78
-10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35
+id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness,popularity,release_decade,instrumentalness,speechiness,duration_min
+1,Sunrise City,Neon Echo,pop,happy,0.82,118,0.84,0.79,0.18,88,2020,0.02,0.06,3.4
+2,Midnight Coding,LoRoom,lofi,chill,0.42,78,0.56,0.62,0.71,62,2020,0.70,0.03,2.8
+3,Storm Runner,Voltline,rock,intense,0.91,152,0.48,0.66,0.10,76,2010,0.05,0.08,4.1
+4,Library Rain,Paper Lanterns,lofi,chill,0.35,72,0.60,0.58,0.86,54,2020,0.82,0.02,2.6
+5,Gym Hero,Max Pulse,pop,intense,0.93,132,0.77,0.88,0.05,91,2020,0.01,0.09,3.2
+6,Spacewalk Thoughts,Orbit Bloom,ambient,chill,0.28,60,0.65,0.41,0.92,45,2020,0.88,0.01,5.2
+7,Coffee Shop Stories,Slow Stereo,jazz,relaxed,0.37,90,0.71,0.54,0.89,58,2010,0.35,0.04,4.6
+8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22,73,2020,0.55,0.03,3.8
+9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78,66,2020,0.76,0.02,3.0
+10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35,79,2020,0.04,0.05,3.5
+11,Electric Horizon,Nova State,edm,euphoric,0.97,140,0.86,0.91,0.03,84,2020,0.20,0.07,3.6
+12,Velvet Morning,June Harbor,r&b,relaxed,0.55,96,0.74,0.69,0.48,71,2020,0.03,0.06,3.9
+13,Old Polaroid,Maple Street,folk,nostalgic,0.31,84,0.63,0.47,0.94,49,2010,0.08,0.04,4.0
+14,Bassline Theory,Wordsmith K,hip-hop,confident,0.88,104,0.72,0.93,0.08,86,2020,0.01,0.42,3.1
+15,Blue Hour,Glass Avenue,indie,melancholic,0.46,102,0.38,0.51,0.66,61,2010,0.12,0.04,4.3
+16,Golden Weekend,Daytrip Club,pop,happy,0.74,122,0.90,0.87,0.14,82,2020,0.01,0.05,3.3
+17,Iron Pulse,Red Circuit,metal,intense,0.98,168,0.31,0.52,0.02,68,2010,0.04,0.10,4.7
+18,Quiet Constellations,Orbit Bloom,ambient,peaceful,0.20,58,0.68,0.32,0.96,41,2020,0.93,0.01,6.1
+19,Salsa Sunset,Ritmo Azul,latin,joyful,0.83,126,0.88,0.94,0.16,77,2020,0.02,0.07,3.8
+20,Sunday Keys,Slow Stereo,jazz,peaceful,0.29,76,0.70,0.45,0.91,52,2000,0.61,0.03,5.0
