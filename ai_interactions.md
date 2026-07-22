@@ -1,43 +1,53 @@
 # AI Interactions Log
 
-> **Stretch features only.** Only fill in the sections that apply to stretch features you attempted. If you did not attempt a stretch feature, leave its section blank or delete it. This file is not required for the core project.
+## Agentic Workflow: Additional Song Attributes
 
----
+**Task given to the agent**
 
-## Agentic Workflow (SF8)
+> Solve the project according to the grading criteria and requirements. Use the easiest genre-first scoring approach, complete the required implementation and documentation, add relevant stretch features, and verify the result.
 
-> Document your experience using an AI agent (e.g., Cursor Agent, Claude, Copilot) to make multi-step changes autonomously.
+**Follow-up design constraints**
 
-**What task did you give the agent?**
+> Keep the algorithm explainable. Use exact genre and mood matches plus numerical similarity, make the explanations agree with the score, and evaluate three distinct profiles.
 
-<!-- Describe the goal you asked the agent to accomplish -->
+**What the agent generated or changed**
 
-**Prompts used:**
+- Expanded `data/songs.csv` from 10 to 20 songs and broadened its genres and moods.
+- Added five attributes not present in the starter design: `popularity`, `release_decade`, `instrumentalness`, `speechiness`, and `duration_min`.
+- Updated CSV loading, the `Song` dataclass, preference profiles, and scoring logic so the new fields are converted and scored consistently.
+- Implemented the functional and OOP recommendation paths in `src/recommender.py`.
+- Added three evaluation profiles, a weight-shift experiment, and formatted output in `src/main.py`.
+- Completed the README and Model Card and expanded the test suite.
 
-<!-- Paste the key prompts you gave the agent -->
+**Manual verification and corrections**
 
-**What did the agent generate or change?**
+- Checked that the CSV contains 20 data rows and loads without errors.
+- Manually verified a perfect core match: genre `3.0` + mood `2.0` + energy `2.0` = `7.0`.
+- Ran all three profiles and confirmed that their first recommendations matched their intended tastes.
+- Confirmed that the energy-focused mode changed the pop profile's third result.
+- Reworked the first generated terminal layout because its unwrapped explanation column was too wide to read.
+- Ran the complete test suite and obtained `10 passed`.
 
-<!-- List the files edited, code generated, or commands run -->
+## Diversity, Novelty, and Fairness
 
-**What did you verify or fix manually?**
+The agent suggested a greedy reranking step rather than permanently modifying each song's base score. After each selection, remaining songs lose `1.0` point per already-selected appearance of the same artist and `0.35` per appearance of the same genre. This preserves the original preference score while discouraging a repetitive final list. The penalty is appended to the recommendation explanation so the adjustment is visible rather than hidden.
 
-<!-- Describe anything the agent got wrong or that required human review -->
+I checked that the lofi profile applies both artist and genre penalties to `Focus Flow` after another LoRoom song and other lofi songs have already been selected.
 
----
+## Design Pattern: Scoring Strategy
 
-## Design Pattern (SF10)
+**Pattern used**
 
-> Document how AI helped you choose or implement a design pattern.
+A lightweight **Strategy pattern** implemented through the `SCORING_MODES` configuration mapping.
 
-**Which design pattern did you use?**
+**How AI contributed**
 
-<!-- e.g., Strategy, Factory, Observer, etc. -->
+AI compared duplicating three scoring functions with keeping one scoring algorithm and injecting different weight dictionaries. The shared-algorithm approach was chosen because all strategies use the same features and similarity formula; only their priorities change.
 
-**How did AI help you brainstorm or implement it?**
+**How it appears in the code**
 
-<!-- Describe the conversation or suggestions that led to your decision -->
+`SCORING_MODES` defines `genre_first`, `mood_first`, and `energy_focus`. Both `score_song()` and `Recommender` accept a mode name, and `main.py` exposes the choice through `--mode`. A user can run `python -m src.main --mode mood_first` without rewriting ranking logic.
 
-**How does the pattern appear in your final code?**
+## Visual Output
 
-<!-- Point to the relevant class or method -->
+The first table placed all explanation text on one extremely wide line. The final `format_table()` function uses fixed column widths and wraps the Reasons column across additional rows. It uses only Python's standard library, so users do not need another package to see titles, artists, scores, and full explanations in a readable table.
